@@ -1,16 +1,20 @@
-// Fill in the required fields as necessary
+// Fill in the required fields with your specific info as necessary
 
-companyName     = ""
-org_id          = ""
-billing_account = ""
-folder_id       = ""
+module "shared-services" {
+
+
+
+companyName     = "Infra Mavenwave"
+org_id          = "487033049345"
+billing_account = "0105E1-61A6DE-D85D10"
+folder_id       = "995591527023"
 activate_apis = [
   "compute.googleapis.com",
   "container.googleapis.com",
 ]
 
 project_labels = {
-  env = ""
+  env = "sandbox"
 }
 
 master_apis = [
@@ -44,19 +48,19 @@ master_apis = [
 ]
 
 //GKE cluster name
-cluster_name = ""
-project      = ""
-svpc_project = ""
+cluster_name = "shared-services-cluster"
+project      = "531303019713"
+svpc_project = "1091854886577"
 
 //GKE region
-region = ""
-zone   = ""
+region = "us-east4"
+zone   = "us-east4-b"
 zones = [
-  "",
-  "",
-  "",
+  "us-east4-b",
+  "us-east4-c",
+  "us-east4-a",
 ]
-master_ipv4_cidr_block = ""
+master_ipv4_cidr_block = "10.0.0.32/28"
 # ====================================
 # ========= Maintenance Variables ====
 # ====================================
@@ -78,13 +82,13 @@ kalm_config      = false
 # ====================================
 # ========= Node Pool Variables ======
 # ====================================
-node_pool_name = ""
+node_pool_name = "shared-services-sandbox-node-pool"
 
 node_pools = [
   {
     name                        = "pool1"
-    machine_type                = "e2-standard-4"
-    node_locations              = ""
+    machine_type                = "e2-small"
+    node_locations              = "us-east4-b,us-east4-a"
     min_count                   = 1
     max_count                   = 3
     local_ssd_count             = 0
@@ -120,7 +124,7 @@ node_pools_metadata = {
   all = {}
 
   pool1 = {
-    node-pool-metadata-custom-value = ""
+    node-pool-metadata-custom-value = "inframw-sandbox-nodepool"
   }
 }
 
@@ -133,11 +137,11 @@ node_pools_tags = {
   all = []
 }
 
-terraform_remote_state_bucket = ""
-host_vpc_output_path          = ""
+terraform_remote_state_bucket = "sandbox-devops-terraform-state"
+host_vpc_output_path          = "host-svpc"
 
-dataset_id     = ""
-dataset_name   = ""
+dataset_id     = "Sandbox"
+dataset_name   = "SandboxDS"
 bq_description = ""
 location       = "US"
 expiration     = 3600000
@@ -156,3 +160,4 @@ gke_role = [
   "roles/stackdriver.resourceMetadata.writer"
 ]
 
+}
