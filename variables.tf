@@ -1,7 +1,7 @@
 # ========================================
 # ========= Project Variables ============
 # ========================================
-variable "companyName" {
+/* variable "companyName" {
   description = "The name of the company - this will be used as a resource name prefix"
   type        = string
 }
@@ -34,6 +34,16 @@ variable "project_labels" {
   description = "Project labels"
   type        = map(string)
 }
+
+# ====================================
+# ======= Shared VPC Variables =======
+# ====================================
+
+variable "host_project_name" {
+  description = "Name for the Shared VPC host project"
+  type        = string
+}
+
 
 # ====================================
 # ========= GKE Variables ============
@@ -235,3 +245,4 @@ variable "expiration" {
   description = "Time until expiration of BQ dataset"
   type        = string
 }
+*/
