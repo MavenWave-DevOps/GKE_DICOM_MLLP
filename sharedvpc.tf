@@ -1,11 +1,13 @@
-module "project-factory_example_shared_vpc" {
-  source               = "terraform-google-modules/project-factory/google//examples/shared_vpc"
-  version              = "14.1.0"
-  organization_id      = "487033049345"
-  billing_account      = "0105E1-61A6DE-D85D10"
-  folder_id            = "995591527023"
-  host_project_name    = "rwl-gke-hostsvpc"
-  network_name         = "gke-svpc"
-  service_project_name = "rwl-gke-service-project"
-
+module "shared-vpc-host-project" {
+  source                         = "git::ssh://git@gitlab.com/akumin/google-cloud-platform/akumin-gcp-project-factory.git"
+  org_id                         = var.org_id
+  random_project_id              = false
+  name                           = var.project_name
+  project_id                     = var.project_id
+  enable_shared_vpc_host_project = true
+  billing_account                = var.billing_account
+  folder_id                      = var.folder_id
+  create_project_sa              = false
+  labels                         = var.labels
+  activate_apis                  = var.activate_apis
 }

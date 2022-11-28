@@ -1,3 +1,151 @@
+variable "project_id" {
+  description = "The Project ID to create the VPC/Networks in"
+  type        = string
+}
+
+variable "region" {
+  description = "The default region for the subnetworks and other creations."
+  type        = string
+}
+
+variable "dr_region" {
+  description = "The region to be used for Disaster recovery components"
+  type        = string
+}
+
+variable "interconnected_region" {
+  description = "The region to be used for interconnect and router."
+  type        = string
+}
+
+variable "vpc_name" {
+  description = "The name of the VPC to be created."
+  type        = string
+}
+
+variable "subnetworks" {
+  description = "The subnetworks including their name, ip, region, and description. You can also override the flow logs or private access."
+  type        = list(map(string))
+  default     = []
+}
+
+variable "secondary_ranges" {
+  description = "These are the secondary ranges for the subnetworks"
+  type = map(list(object({
+    range_name    = string,
+    ip_cidr_range = string
+  })))
+  default = {}
+}
+
+variable "default_subnet_flow_logs" {
+  default     = "true"
+  description = "The default value for subnet_flow_logs within each subnet"
+  type        = string
+}
+
+variable "default_subnet_private_access" {
+  default     = "true"
+  description = "The default value for subnet_private_access within each subnet"
+  type        = string
+}
+
+variable "routes" {
+  default     = []
+  description = "List of routes being created in this VPC"
+  type        = list(map(string))
+}
+
+variable "peering_networks" {
+  type        = map(map(string))
+  description = "map of peering project name and network name"
+  default     = {}
+}
+
+variable "nat" {
+  type        = bool
+  description = "Whether to NAT out of each regional subnetwork"
+  default     = false
+}
+
+variable "asn" {
+  type        = string
+  description = "ASN for use with the Cloud router"
+  default     = ""
+}
+
+variable "vpc_firewall_rules" {
+  description = "List of firewall rule definitions for the specific VPC"
+  default     = {}
+  type = map(object({
+    description          = string
+    direction            = string
+    action               = string # (allow|deny)
+    ranges               = list(string)
+    sources              = list(string)
+    targets              = list(string)
+    use_service_accounts = bool
+    rules = list(object({
+      protocol = string
+      ports    = list(string)
+    }))
+    extra_attributes = map(string)
+  }))
+}
+
+variable "ingress_firewall_rules" {
+  description = "List of firewall rule definitions for the IAP, https and ide"
+  default     = {}
+  type = map(object({
+    description          = string
+    direction            = string
+    action               = string # (allow|deny)
+    ranges               = list(string)
+    sources              = list(string)
+    targets              = list(string)
+    use_service_accounts = bool
+    rules = list(object({
+      protocol = string
+      ports    = list(string)
+    }))
+    extra_attributes = map(string)
+  }))
+}
+
+variable "project_name" {
+  type        = string
+  description = "The name of the project - required for child module"
+}
+
+variable "org_id" {
+  type        = string
+  description = "The organization ID for GCP - requried for child module"
+}
+
+variable "billing_account" {
+  type        = string
+  description = "The billing account ID for GCP - requried for child module"
+}
+
+variable "folder_id" {
+  type        = string
+  description = "The folder ID for GCP - requried for child module"
+}
+
+variable "labels" {
+  type        = map(string)
+  description = "GCP labels"
+  default     = {}
+}
+
+variable "activate_apis" {
+  type        = list(string)
+  description = "The apis to activate in GCP"
+  default     = []
+}
+
+
+
 # ========================================
 # ========= Project Variables ============
 # ========================================
