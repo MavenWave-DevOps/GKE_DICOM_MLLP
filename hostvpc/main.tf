@@ -1,5 +1,5 @@
 locals {
-  project_name = "shared-service-hostvpc"
+  project_name = "rwl-shared-service-hostvpc"
   project_id   = local.project_name
 }
 module "vpc-hostvpc" {
