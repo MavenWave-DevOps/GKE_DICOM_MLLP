@@ -6,6 +6,7 @@ module "network" {
   routing_mode    = "REGIONAL"
   shared_vpc_host = true
 
+
   subnets = [
     {
       subnet_name           = var.subnet[0]
