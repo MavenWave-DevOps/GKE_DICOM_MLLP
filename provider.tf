@@ -17,7 +17,7 @@ data "google_service_account_access_token" "default" {
 }
 
 provider "google" {
-  project         = var.project
-  access_token    = data.google_service_account_access_token.default.access_token
-  request_timeout = "60s"
+  project                     = var.project
+  impersonate_service_account = "tf-import-sa@${var.project}.iam.gserviceaccount.com"
+  request_timeout             = "60s"
 }
