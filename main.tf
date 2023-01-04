@@ -1,4 +1,4 @@
-data "google_client_config" "default" {
+/*data "google_client_config" "default" {
   provider = google
 }
 
@@ -12,4 +12,4 @@ data "google_service_account_access_token" "default" {
 provider "google" {
   alias        = "impersonated"
   access_token = data.google_service_account_access_token.default.access_token
-}
+}*/
