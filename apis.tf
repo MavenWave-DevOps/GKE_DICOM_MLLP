@@ -2,7 +2,7 @@
 # ======= Enable APIs ================
 # ====================================
 
-resource "google_project_service" "gke-compute" {
+/*resource "google_project_service" "gke-compute" {
   project = var.project
   service = "compute.googleapis.com"
 }
@@ -20,4 +20,4 @@ resource "google_project_service" "service-network" {
 resource "google_project_service" "service-management" {
   project = var.project
   service = "servicemanagement.googleapis.com"
-}
+}*/
