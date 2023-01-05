@@ -13,18 +13,21 @@ provider "google" {
     "https://www.googleapis.com/auth/userinfo.email",
   ]
 }
-locals {
-  terraform_service_account = "tf-impersonation@${var.project}.iam.gserviceaccount.com"
+data "google_client_config" "default" {
+  provider = google
 }
 data "google_service_account_access_token" "default" {
-  provider               = google.impersonation
-  target_service_account = local.terraform_service_account
+  provider               = google
+  target_service_account = "tf-import-sa@${var.project}.iam.gserviceaccount.com"
   scopes                 = ["userinfo-email", "cloud-platform"]
   lifetime               = "1200s"
 }
 
 provider "google" {
-  project         = var.project
+  alias = "impersonated"
   access_token    = data.google_service_account_access_token.default.access_token
   request_timeout = "60s"
+}
+ data "google_client_openid_userinfo" "me" {
+  provider = google.impersonated
 }
