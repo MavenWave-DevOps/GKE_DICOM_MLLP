@@ -14,7 +14,7 @@ provider "google" {
   ]
 }
 locals {
-  terraform_service_account = "tf-import-sa@${var.project}.iam.gserviceaccount.com"
+  terraform_service_account = "tf-import-sa@rwl-az-svpc-host.iam.gserviceaccount.com"
 }
 data "google_service_account_access_token" "default" {
   provider               = google.impersonation
