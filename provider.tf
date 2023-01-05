@@ -14,10 +14,10 @@ provider "google" {
   ]
 }
 locals {
-  terraform_service_account = "tf-import-sa@rwl-az-svpc-host.iam.gserviceaccount.com"
+  terraform_service_account = "tf-import-sa@${var.project}.iam.gserviceaccount.com"
 }
 data "google_service_account_access_token" "default" {
-  provider               = google.impersonation
+  provider               = google
   target_service_account = local.terraform_service_account
   scopes                 = ["userinfo-email", "cloud-platform"]
   lifetime               = "1200s"
