@@ -41,7 +41,7 @@ module "gke" {
       auto_upgrade       = true
       service_account    = "tf-gke-gke-test-1-gqw2@${var.project}.iam.gserviceaccount.com"
       preemptible        = false
-      initial_node_count = 80
+      initial_node_count = 3
     },
   ]
 
