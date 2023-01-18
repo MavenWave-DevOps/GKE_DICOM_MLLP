@@ -24,10 +24,10 @@ data "google_service_account_access_token" "default" {
 }
 
 provider "google" {
-  alias = "impersonated"
+  alias           = "impersonated"
   access_token    = data.google_service_account_access_token.default.access_token
   request_timeout = "60s"
 }
- data "google_client_openid_userinfo" "me" {
+data "google_client_openid_userinfo" "me" {
   provider = google.impersonated
 }
